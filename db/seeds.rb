@@ -58,9 +58,9 @@ ActiveRecord::Base.transaction do
   # create organization members
   organization_members = []
 
-  users.shuffle.sample(20).each do |user|
+  users.sample(20).each do |user|
     organization_members << OrganizationMember.create!(
-      organization: organizations.shuffle.sample,
+      organization: organizations.sample,
       user: user
     )
   end
@@ -70,28 +70,28 @@ ActiveRecord::Base.transaction do
 
   patient_entries = []
 
-  patient_records.shuffle.sample(20).each do |patient_record|
-    rand(1..5).times do
+  patient_records.first(20).each do |patient_record|
+    5.times do
       time_randomizer = rand(1..300)
 
       patient_entries << Referral.create!(
-        sender_organization_id: organizations.shuffle.sample.id,
-        target_organization_id: organizations.shuffle.sample.id,
-        referrer_id: organization_members.shuffle.sample.user.id,
+        sender_organization_id: organizations.sample.id,
+        target_organization_id: organizations.sample.id,
+        referrer_id: organization_members.sample.user.id,
         patient_record: patient_record,
         created_at: time + time_randomizer.days,
         updated_at: time + time_randomizer.days
       )
     end
 
-    rand(1..5).times do
+    5.times do
       time_randomizer = rand(1..300)
 
       patient_entries << Message.create!(
         title: Faker::Lorem.sentence(word_count: 3),
         content: Faker::Lorem.sentence(word_count: 10),
         patient_record: patient_record,
-        sender: organization_members.shuffle.sample.user,
+        sender: organization_members.sample.user,
         created_at: time + time_randomizer.days,
         updated_at: time + time_randomizer.days
       )
