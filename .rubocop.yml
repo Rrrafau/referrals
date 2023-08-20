@@ -1,0 +1,5 @@
+AllCops:
+  Exclude:
+    - db/**/*.rb
+    - config/**/*.rb
+    - bin/**/*
