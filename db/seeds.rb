@@ -102,7 +102,9 @@ ActiveRecord::Base.transaction do
   patient_entries.each do |entry|
     PatientLog.create!(
       loggable: entry,
-      patient_record: entry.patient_record
+      patient_record: entry.patient_record,
+      created_at: entry.created_at,
+      updated_at: entry.updated_at
     )
   end
 end
