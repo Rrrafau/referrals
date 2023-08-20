@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PatientLog < ApplicationRecord
   belongs_to :loggable, polymorphic: true, foreign_key: :loggable_id
   belongs_to :patient_record

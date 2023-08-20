@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App comes with complete seeds, just needs starting up. I have not touched the db config, all data should be in
+referrals_development db after manually running create, migrate and seed.
 
-Things you may want to cover:
+Logic overview:
+- stores patient referrals and messages in separate tables
+- creates a polymorphic patient_log table that can reference both messages and referrals as "loggables"
+- keeps users, patient records and organization members separate and defines relationships between them
+- patient log controller retrieves logs for given patient record and eagerly loads associated loggables
 
-* Ruby version
+What's not included:
+- views are not implemented but with given logic it should be very easy to render the loggable entries with templates
+- no tests - tried to keep the dev time down to 3 hours and writing tests first would probably consume most of that time, that said, there is very little custom logic to test here anyway
+- no inline documentation but I would normally document controllers and describe each class
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Notes:
+- code has been run through rubocop with standard config
+- was going to create FactoryBot factories for seeds and add rspec but again, tried to keep it in under 3 hours 
